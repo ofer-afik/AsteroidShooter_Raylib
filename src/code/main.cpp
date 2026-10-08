@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include "../headers/player.hpp"
 
 //------------------------------------------------------------------------------------
 // Program main entry point
@@ -7,8 +8,14 @@ int main(void)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 600;
-    const int screenHeight = 800;
+    const int screenWidth = 650;
+    const int screenHeight = 950;
+
+    const int cellSize = 10;
+
+    const Player player = Player();
+
+
 
     InitWindow(screenWidth, screenHeight, "Arcade Asteroid Shooter"); // Initialize window
 
@@ -28,6 +35,9 @@ int main(void)
         BeginDrawing();
 
             ClearBackground(Color{28, 28, 74, 255});
+            DrawRectangleLinesEx(Rectangle{0, 0, screenWidth, screenHeight}, 5, Color{14, 14, 37, 255});
+            DrawRectangleLinesEx(Rectangle{50, 150, screenWidth - 100, screenHeight - 200}, 5, Color{14, 14, 37, 255});
+            
 
         EndDrawing();
         //----------------------------------------------------------------------------------
