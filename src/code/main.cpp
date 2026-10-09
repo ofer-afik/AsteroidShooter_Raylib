@@ -1,52 +1,43 @@
+// ---------------- Inclusions --------------------------------------------------------------------
+// Raylib
 #include <raylib.h>
-#include "../headers/player.hpp"
 
-//------------------------------------------------------------------------------------
-// Program main entry point
-//------------------------------------------------------------------------------------
+// Local
+#include "../headers/player.hpp"
+#include "../headers/board.hpp"
+#include "../headers/constants.hpp"
+
+// ---------------- Main Function -----------------------------------------------------------------
 int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 650;
-    const int screenHeight = 950;
+// ---------------- Initialization ----------------------------------------------------------------
+    Player player; // Game-wide player object
+    Board board; // Game-wide board (grid, background, UI...) object
 
-    const int cellSize = 10;
+    InitWindow(constants::screenWidth, constants::screenHeight, "Arcade Asteroid Shooter"); // Initialize window
 
-    const Player player = Player();
-
+    SetTargetFPS(60); // Set game to run at 60 frames-per-second
 
 
-    InitWindow(screenWidth, screenHeight, "Arcade Asteroid Shooter"); // Initialize window
-
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
-
-    // Main game loop
+// ---------------- Main game loop ----------------------------------------------------------------
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // Update
-        //----------------------------------------------------------------------------------
-
-        //----------------------------------------------------------------------------------
+        player.Update();
 
         // Draw
-        //----------------------------------------------------------------------------------
         BeginDrawing();
-
-            ClearBackground(Color{28, 28, 74, 255});
-            DrawRectangleLinesEx(Rectangle{0, 0, screenWidth, screenHeight}, 5, Color{14, 14, 37, 255});
-            DrawRectangleLinesEx(Rectangle{50, 150, screenWidth - 100, screenHeight - 200}, 5, Color{14, 14, 37, 255});
-            
-
+            board.Draw();
+            player.Draw(board);
         EndDrawing();
-        //----------------------------------------------------------------------------------
+
     }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window
-    //--------------------------------------------------------------------------------------
+// ---------------- De-Initialization -------------------------------------------------------------
 
+// ---------------- Close and finish --------------------------------------------------------------
+    CloseWindow();        // Close window
     return 0;
 }
+
+// ------------------------------------------------------------------------------------------------
