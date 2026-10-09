@@ -8,13 +8,13 @@
 
 // ---------------- Player Class ------------------------------------------------------------------
 // Constructor
-Player::Player() {
-    position = Vector2{0, 0}; // Number of cells, not number of pixels
+Player::Player(Board board) {
+    position = Vector2{static_cast<float>(board.getGridWidth()) / 2, static_cast<float>(board.getGridHeight() - 5)}; // Number of cells, not number of pixels
 }
 
 // Logic/collisions update function - called during main update phase, see main.cpp
-void Player::Update() {
-    // Currently empty - TODO
+void Player::Update(Board board) {
+    Move(board);
 }
 
 // Draw function - called during main drawing phase, see main.cpp
@@ -25,5 +25,28 @@ void Player::Draw(Board board) {
                   static_cast<float>(board.getCellSize()),
                   BLACK);
 }
+// A helper function
+void Player::Move(Board board) {
+    if (IsKeyDown(KEY_LEFT) && IsKeyDown(KEY_RIGHT)) {
+        return;
+    }
+
+    if (IsKeyDown(KEY_LEFT)) {
+        position.x -= 1.0;
+    }
+
+    if (IsKeyDown(KEY_RIGHT)) {
+        position.x += 1.0;
+    }
+
+    if (position.x < 0.0) {
+        position.x = 0.0;
+    }
+
+    if (position.x >= static_cast<float>(board.getGridWidth())) {
+        position.x = static_cast<float>(board.getGridWidth() - 1);
+    }
+}
+
 
 // ------------------------------------------------------------------------------------------------

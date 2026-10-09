@@ -12,12 +12,13 @@
 // ---------------- Player Class ------------------------------------------------------------------
 class Player {
 public:
-    Player();
-    void Update();
+    Player(Board board);
+    void Update(Board board);
     void Draw(Board board);
 
 private:
     Vector2 position;
+    void Move(Board board);
 };
 
 // ------------------------------------------------------------------------------------------------

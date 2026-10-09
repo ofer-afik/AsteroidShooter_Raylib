@@ -11,8 +11,8 @@
 int main(void)
 {
 // ---------------- Initialization ----------------------------------------------------------------
-    Player player; // Game-wide player object
     Board board; // Game-wide board (grid, background, UI...) object
+    Player player = Player(board); // Game-wide player object
 
     InitWindow(constants::screenWidth, constants::screenHeight, "Arcade Asteroid Shooter"); // Initialize window
 
@@ -23,7 +23,7 @@ int main(void)
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // Update
-        player.Update();
+        player.Update(board);
 
         // Draw
         BeginDrawing();
