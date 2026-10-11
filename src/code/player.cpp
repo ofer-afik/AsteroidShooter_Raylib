@@ -40,11 +40,11 @@ void Player::Move(Board board) {
     }
 
     if (position.x < 0.0) {
-        position.x = 0.0;
+        position.x = static_cast<float>(board.getGridWidth() - 1);
     }
 
     if (position.x >= static_cast<float>(board.getGridWidth())) {
-        position.x = static_cast<float>(board.getGridWidth() - 1);
+        position.x = 0.0;
     }
 }
 

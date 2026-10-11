@@ -1,11 +1,14 @@
 // ---------------- Inclusions --------------------------------------------------------------------
+// C++ Standard
+#include <iostream>
+
 // Raylib
 #include <raylib.h>
 
 // Local
 #include "../headers/player.hpp"
 #include "../headers/board.hpp"
-#include "../headers/constants.hpp"
+#include "../headers/globals.hpp"
 
 // ---------------- Main Function -----------------------------------------------------------------
 int main(void)
@@ -14,7 +17,7 @@ int main(void)
     Board board; // Game-wide board (grid, background, UI...) object
     Player player = Player(board); // Game-wide player object
 
-    InitWindow(constants::screenWidth, constants::screenHeight, "Arcade Asteroid Shooter"); // Initialize window
+    InitWindow(globals::screenWidth, globals::screenHeight, "Arcade Asteroid Shooter"); // Initialize window
 
     SetTargetFPS(60); // Set game to run at 60 frames-per-second
 
@@ -23,6 +26,8 @@ int main(void)
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // Update
+        globals::dt = GetFrameTime();
+        std::cout << std::endl << globals::dt;
         player.Update(board);
 
         // Draw

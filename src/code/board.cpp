@@ -4,7 +4,7 @@
 
 // Local
 #include "../headers/board.hpp"
-#include "../headers/constants.hpp"
+#include "../headers/globals.hpp"
 
 // ---------------- Board Class -------------------------------------------------------------------
 // Constructor
@@ -23,33 +23,33 @@ Board::Board() {
 
 // Draw function - called during main drawing phase, see main.cpp
 void Board::Draw() {
-    ClearBackground(constants::lightSpace);
+    ClearBackground(globals::lightSpace);
 
     // Window border
     DrawRectangleLinesEx(Rectangle{0.0f, 0.0f,
-                        static_cast<float>(constants::screenWidth), 
-                        static_cast<float>(constants::screenHeight)},
-                        10, constants::darkSpace);
+                        static_cast<float>(globals::screenWidth), 
+                        static_cast<float>(globals::screenHeight)},
+                        10, globals::darkSpace);
 
     // Grid border
     DrawRectangleLinesEx(Rectangle{static_cast<float>(boardLeft - 5),
                         static_cast<float>(boardTop - 5),
                         static_cast<float>(boardRight - boardLeft + 10),
                         static_cast<float>(boardBottom - boardTop + 10)},
-                        5, constants::darkSpace);
+                        5, globals::darkSpace);
 
     // Vertical lines
     for (int i = 1; i < gridWidth; i++) {
         DrawLineEx(Vector2{static_cast<float>(boardLeft + i * cellSize), static_cast<float>(boardTop)},
                    Vector2{static_cast<float>(boardLeft + i * cellSize),static_cast<float>(boardBottom)},
-                   1.5f, constants::darkSpace);
+                   1.5f, globals::darkSpace);
     };
 
     // Horizontal lines
     for (int i = 1; i < gridHeight; i++) {
         DrawLineEx(Vector2{static_cast<float>(boardLeft), static_cast<float>(boardTop + i * cellSize)},
                    Vector2{static_cast<float>(boardRight), static_cast<float>(boardTop + i * cellSize)},
-                   1.5f, constants::darkSpace);
+                   1.5f, globals::darkSpace);
     };
 }
 

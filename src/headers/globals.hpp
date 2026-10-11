@@ -3,10 +3,12 @@
 #pragma once
 
 // ---------------- Constants Namespace -------------------------------------------------------------
-namespace constants { // Basically used for all global game constants
+namespace globals { // Basically used for all global game constants
     // Window constants
     const int screenWidth = 700;
     const int screenHeight = 1000;
+
+    inline float dt = 0.1f; // Delta time (time since last frame) - used for smooth movement
 
     // Color constants
     const Color lightSpace = Color{28, 28, 74, 255};
