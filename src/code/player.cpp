@@ -5,6 +5,7 @@
 // Local
 #include "../headers/player.hpp"
 #include "../headers/board.hpp"
+#include "../headers/globals.hpp"
 
 // ---------------- Player Class ------------------------------------------------------------------
 // Constructor
@@ -19,24 +20,24 @@ void Player::Update(Board board) {
 
 // Draw function - called during main drawing phase, see main.cpp
 void Player::Draw(Board board) {
-    DrawRectangle(static_cast<float>(position.x * board.getCellSize() + board.getBoardLeft()),
-                  static_cast<float>(position.y * board.getCellSize() + board.getBoardTop()),
+    DrawRectangle(static_cast<float>(static_cast<int>(position.x) * board.getCellSize() + board.getBoardLeft()),
+                  static_cast<float>(static_cast<int>(position.y) * board.getCellSize() + board.getBoardTop()),
                   static_cast<float>(board.getCellSize()),
                   static_cast<float>(board.getCellSize()),
                   BLACK);
 }
-// A helper function
+// Helper Function
 void Player::Move(Board board) {
     if (IsKeyDown(KEY_LEFT) && IsKeyDown(KEY_RIGHT)) {
         return;
     }
 
     if (IsKeyDown(KEY_LEFT)) {
-        position.x -= 1.0;
+        position.x -= 1.0 * globals::dt * playerSpeed;
     }
 
     if (IsKeyDown(KEY_RIGHT)) {
-        position.x += 1.0;
+        position.x += 1.0 * globals::dt * playerSpeed;
     }
 
     if (position.x < 0.0) {
@@ -47,6 +48,8 @@ void Player::Move(Board board) {
         position.x = 0.0;
     }
 }
+
+
 
 
 // ------------------------------------------------------------------------------------------------

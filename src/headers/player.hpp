@@ -13,12 +13,16 @@
 class Player {
 public:
     Player(Board board);
+
     void Update(Board board);
     void Draw(Board board);
+
+    float playerSpeed = 20.0;
 
 private:
     Vector2 position;
     void Move(Board board);
+    void Shoot(Board board);
 };
 
 // ------------------------------------------------------------------------------------------------

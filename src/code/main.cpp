@@ -19,15 +19,15 @@ int main(void)
 
     InitWindow(globals::screenWidth, globals::screenHeight, "Arcade Asteroid Shooter"); // Initialize window
 
-    SetTargetFPS(60); // Set game to run at 60 frames-per-second
+    SetTargetFPS(120); // Set game to run at 60 frames-per-second
 
 
 // ---------------- Main game loop ----------------------------------------------------------------
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         // Update
-        globals::dt = GetFrameTime();
-        std::cout << std::endl << globals::dt;
+        globals::dt = GetFrameTime(); // Update delta time variable
+
         player.Update(board);
 
         // Draw
