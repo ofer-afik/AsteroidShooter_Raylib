@@ -15,10 +15,10 @@ Board::Board() {
     gridHeight = 40; // Same
 
     // Offsets (screen edge to grid)
-    boardLeft = 50;
-    boardTop = 150;
-    boardRight = boardLeft + gridWidth * cellSize;
-    boardBottom = boardTop + gridHeight * cellSize;
+    boardLeft = 50; // Offset from left
+    boardTop = 150; // Offset from top
+    boardRight = boardLeft + gridWidth * cellSize; // Offset from right
+    boardBottom = boardTop + gridHeight * cellSize; // Offset from bottom
 }
 
 // Draw function - called during main drawing phase, see main.cpp
