@@ -42,26 +42,33 @@ void Player::Draw(Board board) {
 }
 // Helper function, called every Player::Update()
 void Player::Move(Board board) {
-    if (IsKeyDown(KEY_LEFT) && IsKeyDown(KEY_RIGHT)) {
-        return;
+    if (!(IsKeyDown(KEY_LEFT) && IsKeyDown(KEY_RIGHT))) { // If both keys are pressed, don't move
+        // If this is the first time the key is pressed, move the player by one cell
+        if (IsKeyPressed(KEY_LEFT)) {
+            position.x -= 1.0f;
+            lastMoveTime = GetTime();
+        } else if (IsKeyPressed(KEY_RIGHT)) {
+            position.x += 1.0f;
+            lastMoveTime = GetTime();
+
+        } else {
+            // Accumulate multiple short frames before moving continuously.
+            double elapsedTime = GetTime() - lastMoveTime;
+            if (elapsedTime >= 0.1 || heldMovement) { // If the player is holding down a movement key, move continuously
+                if (IsKeyDown(KEY_LEFT)) position.x -= globals::dt * playerSpeed;
+                if (IsKeyDown(KEY_RIGHT)) position.x += globals::dt * playerSpeed;
+                heldMovement = true;
+                lastMoveTime = GetTime();
+            }
+        }
+
+        // Wrap around the player position if it goes out of bounds
+        if (position.x < 0.0) position.x = static_cast<float>(board.getGridWidth() - 1);
+        if (position.x >= static_cast<float>(board.getGridWidth())) position.x = 0.0;
     }
 
-    bool precisionSpeed = !(IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT));
-
-    if (IsKeyDown(KEY_LEFT)) {
-        position.x -= globals::dt * playerSpeed * (precisionSpeed ? 1.0f : 0.5f);
-    }
-
-    if (IsKeyDown(KEY_RIGHT))  {
-        position.x += globals::dt * playerSpeed * (precisionSpeed ? 1.0f : 0.5f);
-    }
-
-    if (position.x < 0.0) {
-        position.x = static_cast<float>(board.getGridWidth() - 1);
-    }
-
-    if (position.x >= static_cast<float>(board.getGridWidth())) {
-        position.x = 0.0;
+    if (!IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT)) { // If neither key is pressed, stop continuous movement
+        heldMovement = false;
     }
 }
 

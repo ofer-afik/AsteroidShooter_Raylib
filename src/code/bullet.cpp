@@ -16,7 +16,7 @@ void Bullet::Update() {
     position.y -= speed * globals::dt;
 
     // Check boundaries
-    active = static_cast<int>(position.y) < 0 ? active = false : active = true;
+    if (static_cast<int>(position.y) < 0) active = false;
 }
 
 void Bullet::Draw(Board board) {

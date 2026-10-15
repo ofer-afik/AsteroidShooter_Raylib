@@ -25,5 +25,5 @@ public:
     Vector2 position = Vector2{0, 0}; // Position holder
 
 private:
-    float speed = 40.0f;
+    float speed = 60.0f;
 };

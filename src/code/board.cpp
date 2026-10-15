@@ -7,20 +7,6 @@
 #include "../headers/globals.hpp"
 
 // ---------------- Board Class -------------------------------------------------------------------
-// Constructor
-Board::Board() {
-    // Grid (*note: that aren't defined as constants)
-    cellSize = 20; // Both height and width of a cell
-    gridWidth = 30; // Cell number, not pixel number
-    gridHeight = 40; // Same
-
-    // Offsets (screen edge to grid)
-    boardLeft = 50; // Offset from left
-    boardTop = 150; // Offset from top
-    boardRight = boardLeft + gridWidth * cellSize; // Offset from right
-    boardBottom = boardTop + gridHeight * cellSize; // Offset from bottom
-}
-
 // Draw function - called during main drawing phase, see main.cpp
 void Board::Draw() {
     ClearBackground(globals::lightSpace);

@@ -5,8 +5,13 @@
 // ---------------- Board Class ------------------------------------------------------------------
 class Board {
 public:
-    Board();
+    // Constructor
+    Board() = default;
+
+    // Draw function
     void Draw();
+
+    // Getter functions
     int getCellSize();
     int getGridWidth();
     int getGridHeight();
@@ -14,14 +19,16 @@ public:
     int getBoardTop();
 
 private:
-    int cellSize;
-    int gridWidth;
-    int gridHeight;
+    // Grid sizes
+    const int cellSize  = 20; // Both height and width of a cell
+    const int gridWidth = 30; // Cell number, not pixel number
+    const int gridHeight = 40; // Same
 
-    int boardLeft;
-    int boardTop;
-    int boardRight;
-    int boardBottom;
+    // Grid offsets
+    const int boardLeft = 50; // Offset from left
+    const int boardTop = 150; // Offset from top
+    const int boardRight = boardLeft + gridWidth * cellSize; // Offset from right
+    const int boardBottom = boardTop + gridHeight * cellSize; // Offset from bottom
 };
 
 // ------------------------------------------------------------------------------------------------
