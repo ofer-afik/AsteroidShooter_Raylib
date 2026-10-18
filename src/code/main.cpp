@@ -25,6 +25,7 @@ int main()
     // Enemy spawning engine
     std::random_device rd;
     std::mt19937 enemySpawnGen(rd());
+    std::bernoulli_distribution enemySpawnDist(0.005);
 
     // Window config
     InitWindow(globals::screenWidth, globals::screenHeight, "Arcade Asteroid Shooter"); // Initialize window
@@ -40,7 +41,9 @@ int main()
         player.Update(board);
 
         // Enemy spawning and updating
-        if (std::bernoulli_distribution{0.001 * GetTime()}(enemySpawnGen)) enemies.push_back(Enemy(board));
+        for (int i = 0; i < static_cast<int>(GetTime() / 5.0); i++) {
+            if (enemySpawnDist(enemySpawnGen)) enemies.push_back(Enemy(board));
+        }
 
         for (Enemy& enemy : enemies) enemy.Update(board, player);
         std::erase_if(enemies, [](Enemy& enemy) { return !enemy.alive; }); // Remove dead enemies
