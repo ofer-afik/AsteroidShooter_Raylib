@@ -5,3 +5,6 @@
 
 This is a work-in-progress game, written in C++, with the C Raylib library. This project will be a desktop executable, with planned versions for macos, windows, and linux.
 I started this project with the goal of getting more familiar with the C++ language, and learning to deal with larger codebases.
+
+### How to play
+Use arrows and space key to play.
