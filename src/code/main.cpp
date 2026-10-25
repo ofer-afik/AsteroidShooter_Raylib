@@ -3,6 +3,9 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <memory>
+#include <string>
+#include <typeinfo>
 
 // Raylib
 #include <raylib.h>
@@ -12,57 +15,45 @@
 #include "../headers/board.hpp"
 #include "../headers/globals.hpp"
 #include "../headers/enemy.hpp"
+#include "../headers/gamestates.hpp"
+
+// ---------------- Pre-Function Set up -----------------------------------------------------------
+// Initialize state pointer
+std::unique_ptr<GameState> globals::currentState = std::make_unique<TitleScreen>();
+
 
 // ---------------- Main Function -----------------------------------------------------------------
-int main()
-{
-// ---------------- Initialization ----------------------------------------------------------------
-    // Game config
-    Board board; // Game-wide board (grid, background, UI...) object
-    Player player = Player(board); // Game-wide player object
-    std::vector<Enemy> enemies;
+int main() {
+    // Initialize window
+    InitWindow(globals::currentState->screenWidth, globals::currentState->screenHeight, globals::windowTitle.c_str());
+    SetTargetFPS(120);
 
-    // Enemy spawning engine
-    std::random_device rd;
-    std::mt19937 enemySpawnGen(rd());
-    std::bernoulli_distribution enemySpawnDist(0.005);
+    // Load bullet art
+    Bullet::srcImg = LoadImage("src/assets/pixelorama/images/bullet.png");
+    Bullet::bulletImg = LoadTextureFromImage(Bullet::srcImg);
+    UnloadImage(Bullet::srcImg);
 
-    // Window config
-    InitWindow(globals::screenWidth, globals::screenHeight, "Arcade Asteroid Shooter"); // Initialize window
-    SetTargetFPS(120); // Set game to run at 60 frames-per-second
+    // Load enemy art
+    Enemy::srcImg = LoadImage("src/assets/pixelorama/images/enemy.png");
+    Enemy::enemyImg = LoadTextureFromImage(Enemy::srcImg);
+    UnloadImage(Enemy::srcImg);
 
+    // Main game loop
+    while (!WindowShouldClose()) {
+        // Update delta time
+        globals::dt = GetFrameTime();
 
-// ---------------- Main game loop ----------------------------------------------------------------
-    while (!WindowShouldClose() && player.alive)    // Detect window close button or ESC key
-    {
-        // Update
-        globals::dt = GetFrameTime(); // Update delta time variable
+        // Update game
+        globals::currentState->Update();
 
-        player.Update(board);
-
-        // Enemy spawning and updating
-        for (int i = 0; i < static_cast<int>(GetTime() / 5.0); i++) {
-            if (enemySpawnDist(enemySpawnGen)) enemies.push_back(Enemy(board));
-        }
-
-        for (Enemy& enemy : enemies) enemy.Update(board, player);
-        std::erase_if(enemies, [](Enemy& enemy) { return !enemy.alive; }); // Remove dead enemies
-
-        // Draw
+        // Draw game
         BeginDrawing();
-            board.Draw();
-            player.Draw(board);
-            for (Enemy& enemy : enemies) enemy.Draw(board);
+            globals::currentState->Draw();
         EndDrawing();
+    }
 
-        // Set properties for next frame logic
-        for (Enemy& enemy : enemies) enemy.lastFramePos = enemy.position;
-}
 
-// ---------------- De-Initialization -------------------------------------------------------------
-
-// ---------------- Close and finish --------------------------------------------------------------
-    CloseWindow();        // Close window
+    CloseWindow();
     return 0;
 }
 

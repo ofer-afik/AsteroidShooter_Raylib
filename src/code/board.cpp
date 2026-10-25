@@ -9,54 +9,37 @@
 // ---------------- Board Class -------------------------------------------------------------------
 // Draw function - called during main drawing phase, see main.cpp
 void Board::Draw() {
-    ClearBackground(globals::lightSpace);
-
     // Window border
     DrawRectangleLinesEx(Rectangle{0.0f, 0.0f,
-                        static_cast<float>(globals::screenWidth), 
-                        static_cast<float>(globals::screenHeight)},
-                        10, globals::darkSpace);
+                        static_cast<float>(globals::currentState->screenWidth), 
+                        static_cast<float>(globals::currentState->screenHeight)},
+                        10, globals::colors[2]);
 
     // Grid border
     DrawRectangleLinesEx(Rectangle{static_cast<float>(boardLeft - 5),
                         static_cast<float>(boardTop - 5),
                         static_cast<float>(boardRight - boardLeft + 10),
                         static_cast<float>(boardBottom - boardTop + 10)},
-                        5, globals::darkSpace);
-
-    // Vertical lines
-    for (int i = 1; i < gridWidth; i++) {
-        DrawLineEx(Vector2{static_cast<float>(boardLeft + i * cellSize), static_cast<float>(boardTop)},
-                   Vector2{static_cast<float>(boardLeft + i * cellSize),static_cast<float>(boardBottom)},
-                   1.5f, globals::darkSpace);
-    };
-
-    // Horizontal lines
-    for (int i = 1; i < gridHeight; i++) {
-        DrawLineEx(Vector2{static_cast<float>(boardLeft), static_cast<float>(boardTop + i * cellSize)},
-                   Vector2{static_cast<float>(boardRight), static_cast<float>(boardTop + i * cellSize)},
-                   1.5f, globals::darkSpace);
-    };
+                        5, globals::colors[2]);
 }
 
 // Getter functions
-
-int Board::getCellSize() {
+int Board::getCellSize() const{
     return cellSize;
 }
 
-int Board::getGridWidth() {
+int Board::getGridWidth() const{
     return gridWidth;
 }
 
-int Board::getGridHeight() {
+int Board::getGridHeight() const{
     return gridHeight;
 }
 
-int Board::getBoardLeft() {
+int Board::getBoardLeft() const{
     return boardLeft;
 }
-int Board::getBoardTop() {
+int Board::getBoardTop() const{
     return boardTop;
 }
 

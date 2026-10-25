@@ -7,13 +7,13 @@
 #include "../headers/globals.hpp"
 
 // ---------------- Bullet Class ------------------------------------------------------------------
-Bullet::Bullet(Vector2 pos) {
-    position = pos;
-}
+// Art setup
+Image Bullet::srcImg = {};
+Texture2D Bullet::bulletImg = {};
 
 void Bullet::Update() {
     // Update position
-    position.y -= speed * globals::dt;
+    position.y -= bulletSpeed * globals::dt;
 
     // Check boundaries
     if (static_cast<int>(position.y) < 0) active = false;
@@ -21,10 +21,6 @@ void Bullet::Update() {
 
 void Bullet::Draw(Board board) {
     if (active) {
-        DrawRectangle(static_cast<float>(static_cast<int>(position.x) * board.getCellSize() + board.getBoardLeft()),
-                    static_cast<float>(static_cast<int>(position.y) * board.getCellSize() + board.getBoardTop()),
-                    static_cast<float>(board.getCellSize()),
-                    static_cast<float>(board.getCellSize()),
-                    WHITE);
+        DrawTexture(bulletImg, static_cast<int>(position.x) + board.getBoardLeft(), static_cast<int>(position.y) + board.getBoardTop(), WHITE);
     }
 }

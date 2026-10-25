@@ -16,28 +16,33 @@
 // ---------------- Player Class ------------------------------------------------------------------
 class Player {
 public:
-    // Constructor
-    Player(Board);
+    // Constructor + Deconstructor
+    Player();
+    ~Player();
 
     // Functions
-    void Update(Board);
-    void Draw(Board);
+    void Update(const Board&);
+    void Draw(const Board&);
 
     // Properties
-    float playerSpeed = 20.0f;
+    float playerAccel = 40.0f;
+    float playerMaxVel = 700.f;
+    float playerVel  = 0.f;
+    // double timeMoveBegan;
     Vector2 position;
     bool alive = true;
 
     // Bullets
     std::array<Bullet, 100> bullets;
 
-
-
 private:
-    void Move(Board);
+    // Helper functions
+    void Move(const Board&);
     void Shoot();
-    double lastMoveTime = 0.0; // Time of last movement, for movement speed control
-    bool heldMovement = false; // If the player is holding down a movement key, for movement speed control
+
+    // Image assets
+    Image srcImg;
+    Texture2D playerImg;
 };
 
 // ------------------------------------------------------------------------------------------------

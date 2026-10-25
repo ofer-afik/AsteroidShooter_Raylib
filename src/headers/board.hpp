@@ -12,17 +12,17 @@ public:
     void Draw();
 
     // Getter functions
-    int getCellSize();
-    int getGridWidth();
-    int getGridHeight();
-    int getBoardLeft();
-    int getBoardTop();
+    int getCellSize() const;
+    int getGridWidth() const;
+    int getGridHeight() const;
+    int getBoardLeft() const;
+    int getBoardTop() const;
 
 private:
     // Grid sizes
-    const int cellSize  = 20; // Both height and width of a cell
-    const int gridWidth = 30; // Cell number, not pixel number
-    const int gridHeight = 40; // Same
+    const int cellSize  = 32; // Both height and width of a cell
+    const int gridWidth = 20; // Cell number, not pixel number
+    const int gridHeight = 26; // Same
 
     // Grid offsets
     const int boardLeft = 50; // Offset from left

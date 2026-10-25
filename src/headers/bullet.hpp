@@ -6,15 +6,13 @@
 #include <raylib.h>
 
 // Local
-#include "globals.hpp"
 #include "board.hpp"
 
 // ---------------- Bullet Class ------------------------------------------------------------------
 class Bullet {
 public:
     // Constructors
-    Bullet() = default; // Default-constructor, for empty bullets (for bullets array creation)
-    Bullet(Vector2); // Constructor
+    Bullet() = default;
 
     // Functions
     void Update();
@@ -24,6 +22,11 @@ public:
     bool active = false;
     Vector2 position = Vector2{0, 0}; // Position holder
 
+    // Art assets
+    static Image srcImg;
+    static Texture2D bulletImg;
+
 private:
-    float speed = 60.0f;
+    // Speed
+    float bulletSpeed = 2000.0f;
 };

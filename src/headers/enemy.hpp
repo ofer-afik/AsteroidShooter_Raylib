@@ -1,11 +1,12 @@
 // ---------------- Inclusions --------------------------------------------------------------------
+#pragma once
+
 // C++
 
 // Raylib
 #include <raylib.h>
 
 // Local
-#include "globals.hpp"
 #include "board.hpp"
 #include "player.hpp"
 
@@ -21,9 +22,12 @@ public:
 
     // Properties
     Vector2 position;
-    Vector2 lastFramePos;
     bool alive = true;
 
+    // Art assets
+    static Image srcImg;
+    static Texture2D enemyImg;
+
 private:
-    float speed;
+    float enemySpeed;
 };
