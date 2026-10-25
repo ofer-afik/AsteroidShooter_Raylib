@@ -13,6 +13,7 @@
 #include "../headers/enemy.hpp"
 #include "../headers/board.hpp"
 #include "../headers/gamestates.hpp"
+#include "../headers/embedded_assets.hpp"
 
 // ---------------- Title screen ------------------------------------------------------------------
 // Constructor
@@ -31,7 +32,7 @@ TitleScreen::~TitleScreen() {
 void TitleScreen::Update() {
     // Load texture
     if (!bgLoaded) { // If bg null
-        image = LoadImage("src/assets/pixelorama/images/titlescreen.png");
+        image = LoadEmbeddedImage("titlescreen.png");
         bg = LoadTextureFromImage(image);
         UnloadImage(image);
         bgLoaded = true;
@@ -121,7 +122,7 @@ Menu::Menu() {
     SetWindowSize(screenWidth, screenHeight);
 
     // Art assets
-    srcImg = LoadImage("src/assets/pixelorama/images/heart.png");
+    srcImg = LoadEmbeddedImage("heart.png");
     heartImg = LoadTextureFromImage(srcImg);
     UnloadImage(srcImg);
 }
@@ -197,7 +198,7 @@ GameOver::~GameOver() {
 void GameOver::Update() {
     // Load texture
     if (!bgLoaded) { // If bg null
-        image = LoadImage("src/assets/pixelorama/images/gameoverscreen.png");
+        image = LoadEmbeddedImage("gameoverscreen.png");
         bg = LoadTextureFromImage(image);
         UnloadImage(image);
         bgLoaded = true;

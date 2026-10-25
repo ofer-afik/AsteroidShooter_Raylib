@@ -16,6 +16,7 @@
 #include "../headers/globals.hpp"
 #include "../headers/enemy.hpp"
 #include "../headers/gamestates.hpp"
+#include "../headers/embedded_assets.hpp"
 
 // ---------------- Pre-Function Set up -----------------------------------------------------------
 // Initialize state pointer
@@ -29,12 +30,12 @@ int main() {
     SetTargetFPS(120);
 
     // Load bullet art
-    Bullet::srcImg = LoadImage("src/assets/pixelorama/images/bullet.png");
+    Bullet::srcImg = LoadEmbeddedImage("bullet.png");
     Bullet::bulletImg = LoadTextureFromImage(Bullet::srcImg);
     UnloadImage(Bullet::srcImg);
 
     // Load enemy art
-    Enemy::srcImg = LoadImage("src/assets/pixelorama/images/enemy.png");
+    Enemy::srcImg = LoadEmbeddedImage("enemy.png");
     Enemy::enemyImg = LoadTextureFromImage(Enemy::srcImg);
     UnloadImage(Enemy::srcImg);
 

@@ -9,6 +9,7 @@
 #include "../headers/player.hpp"
 #include "../headers/board.hpp"
 #include "../headers/globals.hpp"
+#include "../headers/embedded_assets.hpp"
 
 // ---------------- Player Class ------------------------------------------------------------------
 // Constructor
@@ -17,7 +18,7 @@ Player::Player() {
     position = Vector2{320.0, 736.0}; // Number of pixels, not number of cells
 
     // Art setup
-    srcImg = LoadImage("src/assets/pixelorama/images/player.png");
+    srcImg = LoadEmbeddedImage("player.png");
     playerImg = LoadTextureFromImage(srcImg);
     UnloadImage(srcImg);
 }
