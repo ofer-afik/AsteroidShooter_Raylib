@@ -1,60 +1,28 @@
-name: Build desktop platforms
+name: Windows Build
 
 on:
   push:
-    branches: [main]
   pull_request:
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
   build:
-    name: Build on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: windows-latest
 
     steps:
       - name: Check out source
         uses: actions/checkout@v4
 
-      - name: Install Raylib on Linux
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libraylib-dev
+      - name: Configure CMake
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF
 
-      - name: Install Raylib on macOS
-        if: runner.os == 'macOS'
-        run: brew install raylib
-
-      - name: Install Raylib on Windows
-        if: runner.os == 'Windows'
-        run: vcpkg install raylib:x64-windows
-
-      - name: Configure on Windows
-        if: runner.os == 'Windows'
-        run: >-
-          cmake -S . -B build
-          -DCMAKE_BUILD_TYPE=Release
-          -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake"
-          -DVCPKG_TARGET_TRIPLET=x64-windows
-
-      - name: Configure on Linux and macOS
-        if: runner.os != 'Windows'
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-
-      - name: Build
+      - name: Build game
         run: cmake --build build --config Release --parallel
 
-      - name: Upload executable
+      - name: Upload game executable
         uses: actions/upload-artifact@v4
         with:
-          name: asteroid-shooter-${{ runner.os }}
-          path: ${{ runner.os == 'Windows' && 'build/Release/asteroid_shooter.exe' || 'build/asteroid_shooter' }}
+          name: AsteroidShooter-windows
+          path: build/Release/AsteroidShooter.exe
           if-no-files-found: error
-          retention-days: 14
+          compression-level: 0
