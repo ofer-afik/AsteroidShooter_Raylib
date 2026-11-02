@@ -1,9 +1,11 @@
 # Asteroid Shooter
 ## An asteroid shooter made with C++ and Raylib.
 
+A game where you must remain alive, by either avoiding or shooting at falling enemies, while enemies spawn faster, and enemy speed gets faster.
+
 <img width="510" height="227" alt="image" src="https://github.com/user-attachments/assets/995ad082-9ec2-4260-b686-22712e705255" />
 
-
+<img width="699" height="1035" alt="image" src="https://github.com/user-attachments/assets/1590b5ee-42f0-48a0-a21f-3358fe8d7b3e" />
 
 This is a work-in-progress game, written in C++, with the C Raylib library. This project will be a desktop executable, with planned versions for macos, windows, and linux.
 I started this project with the goal of getting more familiar with the C++ language, and learning to deal with larger codebases.
