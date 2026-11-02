@@ -14,4 +14,4 @@ This is a work-in-progress game, written in C++, with the C Raylib library. This
 I started this project with the goal of getting more familiar with the C++ language, and learning to deal with larger codebases.
 
 ### How to play
-Use arrows and space key to play, enter to continue.
+Use arrows and space key to play, enter to continue. Enjoy the game!
